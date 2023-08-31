@@ -21,6 +21,7 @@ class ViewControllerViewModel {
     let manager: CoreDataManager
     
     var notes: [NoteEntity] = []
+
     
     func fetchData() {
         notes = []
@@ -81,6 +82,4 @@ class ViewControllerViewModel {
         let container = UIHostingController(rootView: viewForNewItem)
         viewController.navigationController?.pushViewController(container, animated: true)
     }
-    
-    
 }

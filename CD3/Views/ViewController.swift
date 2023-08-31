@@ -12,6 +12,11 @@ import CoreData
 
 extension ViewController: dismissViewDelegate {
     
+    func reloadTableView() {
+        tableView.reloadData()
+    }
+    
+    
     func appendNewNoteToSnapshot(note: NoteEntity) {
         appendItemToSnapshot(item: note)
     }
@@ -30,26 +35,29 @@ class ViewController: UIViewController, UITableViewDelegate {
     }()
     
     var addNewNoteButton: UIBarButtonItem!
+    var showTagsButton: UIBarButtonItem!
     var dataSource: UITableViewDiffableDataSource<TableViewSection, NoteEntity>!
     var viewModel: ViewControllerViewModel!
     
-    func addSampleTag() {
-        let tag = TagEntity(context: viewModel.manager.context)
-        tag.name = "Sample tag 2"
-        tag.notes = NSSet(array: viewModel.notes)
-        viewModel.manager.context.insert(tag)
-        viewModel.manager.save()
-    }
+//    func addSampleTag() {
+//        let tag = TagEntity(context: viewModel.manager.context)
+//        tag.name = "Sample tag 2"
+//        tag.notes = NSSet(array: viewModel.notes)
+//        viewModel.manager.context.insert(tag)
+//        viewModel.manager.save()
+//    }
     
     override func viewDidLoad() {
         viewModel = ViewControllerViewModel()
-        title = "Core Data Demo"
+        title = "Core Data Notes"
         setupTableView()
         setupDataSource()
         setupSnapshot()
         setupTabBar()
+        showTagsButton = UIBarButtonItem(image: UIImage(systemName: "tag"), style: .plain, target: self, action: #selector(showSheetView))
         addNewNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNote))
         navigationItem.rightBarButtonItem = addNewNoteButton
+        navigationItem.leftBarButtonItem = showTagsButton
         
 //        addSampleTag()
         
@@ -59,6 +67,25 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     @objc func addNewNote() {
         viewModel.createNewItem(viewController: self)
+    }
+    
+    @objc func showSheetView() {
+        let viewModel = TagsViewModel()
+        viewModel.delegate = self
+        
+        let sheetController = UIHostingController(rootView: TagsView(viewModel: viewModel))
+        
+        let viewControllerToPresent = sheetController
+        if let sheet = viewControllerToPresent.sheetPresentationController {
+            sheet.detents = [.large()]
+            sheet.largestUndimmedDetentIdentifier = .none
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            sheet.prefersGrabberVisible = false
+            sheet.preferredCornerRadius = 20
+        }
+        present(viewControllerToPresent, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -165,7 +192,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     
 
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeToDelete(indexPath: indexPath)
     }
     

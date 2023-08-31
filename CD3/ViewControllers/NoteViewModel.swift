@@ -6,11 +6,13 @@
 //
 
 import Foundation
+
 class NoteViewModel: ObservableObject {
     
     weak var delegate: dismissViewDelegate?
     
     let manager = CoreDataManager.shared
+    let allTagsViewModel = TagsViewModel()
     private var note: NoteEntity
     private let isNewNote: Bool
     
@@ -26,20 +28,83 @@ class NoteViewModel: ObservableObject {
     @Published var tagsArray = [TagEntity]()
     @Published var newTagName = ""
     @Published var saveTagButtonIsDisabled = true
+    @Published var tagAlreadyExistsForThisNote = false
+    @Published var tagExistsInDatabase = false
     
-    func saveTag(tag: String) -> TagEntity {
+    func saveTag(tag: String) {
         let newTag = TagEntity(context: manager.context)
         newTag.name = tag
-        newTag.notes = NSSet(array: [note])
+        tagsArray.append(newTag)
+        newTag.addToNotes(note)
         manager.context.insert(newTag)
         manager.save()
-        return newTag
+    }
+    
+    
+    func saveTagWith(name: String) {
+        if let tag = checkIfTagAlreadyExistsInDatabase(name: name) {
+            note.addToTags(tag)
+            tagsArray.append(tag)
+            manager.save()
+        } else {
+            saveTag(tag: name)
+        }
     }
     
     func removeTag(tag: TagEntity) {
         note.removeFromTags(tag)
         manager.save()
     }
+    
+    @discardableResult
+    func checkIfTagAlreadyExistsForThisNote(name: String) -> TagEntity? {
+        
+        var output: TagEntity?
+        
+        for tag in tagsArray {
+            if tag.name == name {
+                output = tag
+                break
+            } else {
+                output = nil
+            }
+        }
+        
+        if let output = output {
+            tagAlreadyExistsForThisNote = true
+        } else {
+            tagAlreadyExistsForThisNote = false
+        }
+        
+        return output
+        
+    }
+    
+    @discardableResult
+    func checkIfTagAlreadyExistsInDatabase(name: String) -> TagEntity? {
+        
+        var output: TagEntity?
+        
+        for tag in allTagsViewModel.allAvailableTagsInDatabase {
+            if tag.name == name {
+                output = tag
+                break
+            } else {
+                output = nil
+            }
+        }
+        
+        if let output = output {
+            tagExistsInDatabase = true
+        } else {
+            tagExistsInDatabase = false
+        }
+        
+        return output
+        
+    }
+    
+    
     
     func saveNote() {
         note.text = text
@@ -56,4 +121,6 @@ class NoteViewModel: ObservableObject {
         manager.save()
         delegate?.dismiss()
     }
+    
+
 }

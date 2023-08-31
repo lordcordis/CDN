@@ -14,12 +14,11 @@ struct NoteView: View {
     @StateObject var viewModel: NoteViewModel
     
     var body: some View {
+        
         Form {
             Section {
-                TextField("Text Here", text: $viewModel.text)
-                    .padding(.all)
-                    .padding(.horizontal)
-                    .frame(width: UIScreen.main.bounds.width, height: 300, alignment: .center)
+                TextEditor(text: $viewModel.text)
+                    .multilineTextAlignment(.leading)
                     .onChange(of: viewModel.text) { newValue in
                         
                         withAnimation {
@@ -30,6 +29,7 @@ struct NoteView: View {
                             }
                         }
                     }
+                    .frame(width: 300, height: 200, alignment: .leading)
                 
                 Button("Save note") {
                     viewModel.saveNote()
@@ -37,49 +37,61 @@ struct NoteView: View {
             }
                 
             
-            Section() {
-                
-                List {
-                    ForEach(viewModel.tagsArray) { tag in
-                        Text(tag.name ?? "")
-                    }.onDelete { indexSet in
-                        let index = indexSet.first!
-                        let tag = viewModel.tagsArray[index]
-                        viewModel.tagsArray.remove(at: index)
-                        viewModel.removeTag(tag: tag)
+            
+            
+                Section("Tags") {
+                    
+                    List {
+                        ForEach(viewModel.tagsArray) { tag in
+                            Text(tag.name ?? "")
+                        }.onDelete { indexSet in
+                            let index = indexSet.first!
+                            let tag = viewModel.tagsArray[index]
+                            viewModel.tagsArray.remove(at: index)
+                            viewModel.removeTag(tag: tag)
+                        }
                     }
                 }
-            }
+            
+            
+
             
             Section("add tag") {
                 
                 TextField("Add tag name", text: $viewModel.newTagName)
-                Button("Save tag") {
-                    let newTag = viewModel.saveTag(tag: viewModel.newTagName)
-                    viewModel.tagsArray.append(newTag)
-                    viewModel.newTagName = ""
+                    .onChange(of: viewModel.newTagName) { newValue in
+                        viewModel.checkIfTagAlreadyExistsForThisNote(name: newValue)
+                        viewModel.checkIfTagAlreadyExistsInDatabase(name: newValue)
+                    }
+                
+                HStack {
+                    
+                    Button("Save tag") {
+                        
+                        withAnimation {
+                            viewModel.saveTagWith(name: viewModel.newTagName)
+                            viewModel.newTagName = ""
+                        }
+                        
+
+
+                        
+                        
+                    }
+                    .disabled(viewModel.newTagName.isEmpty || viewModel.tagAlreadyExistsForThisNote)
+                    
+                    
+                    Spacer()
+                    if viewModel.tagAlreadyExistsForThisNote {
+                        Label("Tag already exists", systemImage: "exclamationmark.triangle").foregroundColor(Color.yellow)
+                    } else if viewModel.tagExistsInDatabase {
+                        Image(systemName: "checkmark.circle").foregroundColor(Color.green)
+                    }
+                    
+                    
                 }
-                .disabled(viewModel.newTagName.isEmpty ? true : false)
-                
-                
-                
-                
+
             }
-
-            
-            
-                
-            
-            
-            
-
-            
-                
-
-
-            
-            
-            
             
         }
     }
@@ -88,6 +100,7 @@ struct NoteView: View {
 protocol dismissViewDelegate: AnyObject {
     func dismiss()
     func appendNewNoteToSnapshot(note: NoteEntity)
+    func reloadTableView()
 }
 
 //struct NoteView_Previews: PreviewProvider {
