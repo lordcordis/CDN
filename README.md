@@ -11,12 +11,9 @@ CoreDataNote is a simple iOS application that demonstrates the use of Core Data 
 - Delete notes
 - Persistent storage using Core Data
 
-<p align="center">
 ![IMG_5267](https://github.com/user-attachments/assets/673db155-9958-4dee-8ffb-f238c9fe3adf)
 ![IMG_5268](https://github.com/user-attachments/assets/a08d1dbf-5f2c-4869-9d87-1249c445d281)
 ![IMG_5269](https://github.com/user-attachments/assets/142ae6a6-3da4-4455-bed4-75b8700537ba)
-</p>
-
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
