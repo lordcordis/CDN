@@ -19,16 +19,15 @@ struct NoteView: View {
             Section {
                 TextEditor(text: $viewModel.text)
                     .multilineTextAlignment(.leading)
-                    .onChange(of: viewModel.text) { newValue in
-                        
+                    .onChange(of: viewModel.text, {
                         withAnimation {
-                            if newValue.isEmpty {
+                            if viewModel.text.isEmpty {
                                 viewModel.saveButtonIsDisabled = true
                             } else {
                                 viewModel.saveButtonIsDisabled = false
                             }
                         }
-                    }
+                    })
                     .frame(width: 300, height: 200, alignment: .leading)
                 
                 Button("Save note") {
@@ -59,29 +58,22 @@ struct NoteView: View {
             Section("add tag") {
                 
                 TextField("Add tag name", text: $viewModel.newTagName)
-                    .onChange(of: viewModel.newTagName) { newValue in
-                        viewModel.checkIfTagAlreadyExistsForThisNote(name: newValue)
-                        viewModel.checkIfTagAlreadyExistsInDatabase(name: newValue)
-                    }
+                    .onChange(of: viewModel.newTagName, {
+                        viewModel.checkIfTagAlreadyExistsForThisNote(name: viewModel.newTagName)
+                        viewModel.checkIfTagAlreadyExistsInDatabase(name: viewModel.newTagName)
+                    })
                 
                 HStack {
-                    
                     Button("Save tag") {
-                        
                         withAnimation {
                             viewModel.saveTagWith(name: viewModel.newTagName)
                             viewModel.newTagName = ""
                         }
-                        
-
-
-                        
-                        
                     }
                     .disabled(viewModel.newTagName.isEmpty || viewModel.tagAlreadyExistsForThisNote)
                     
-                    
                     Spacer()
+                    
                     if viewModel.tagAlreadyExistsForThisNote {
                         Label("Tag already exists", systemImage: "exclamationmark.triangle").foregroundColor(Color.yellow)
                     } else if viewModel.tagExistsInDatabase {
@@ -102,9 +94,3 @@ protocol dismissViewDelegate: AnyObject {
     func appendNewNoteToSnapshot(note: NoteEntity)
     func reloadTableView()
 }
-
-//struct NoteView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        NoteView(viewModel: NoteViewModel.sample)
-//    }
-//}

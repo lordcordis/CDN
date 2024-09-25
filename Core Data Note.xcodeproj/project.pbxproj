@@ -25,7 +25,7 @@
 		002D64EF2A9CFB7500BCCAF0 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		006540D12A9E284C00BBD644 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		006540D32A9E287800BBD644 /* ViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerViewModel.swift; sourceTree = "<group>"; };
-		009A20212A9CD0C20065C99A /* CD3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CD3.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		009A20212A9CD0C20065C99A /* Core Data Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Core Data Note.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		009A20242A9CD0C20065C99A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		009A20262A9CD0C20065C99A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		009A20282A9CD0C20065C99A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		009A20182A9CD0C20065C99A = {
 			isa = PBXGroup;
 			children = (
-				009A20232A9CD0C20065C99A /* CD3 */,
+				009A20232A9CD0C20065C99A /* Core Data Note */,
 				009A20222A9CD0C20065C99A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,12 +80,12 @@
 		009A20222A9CD0C20065C99A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				009A20212A9CD0C20065C99A /* CD3.app */,
+				009A20212A9CD0C20065C99A /* Core Data Note.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		009A20232A9CD0C20065C99A /* CD3 */ = {
+		009A20232A9CD0C20065C99A /* Core Data Note */ = {
 			isa = PBXGroup;
 			children = (
 				009A20242A9CD0C20065C99A /* AppDelegate.swift */,
@@ -98,15 +98,15 @@
 				009A202F2A9CD0C40065C99A /* LaunchScreen.storyboard */,
 				009A20322A9CD0C40065C99A /* Info.plist */,
 			);
-			path = CD3;
+			path = "Core Data Note";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		009A20202A9CD0C20065C99A /* CD3 */ = {
+		009A20202A9CD0C20065C99A /* Core Data Note */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 009A20352A9CD0C40065C99A /* Build configuration list for PBXNativeTarget "CD3" */;
+			buildConfigurationList = 009A20352A9CD0C40065C99A /* Build configuration list for PBXNativeTarget "Core Data Note" */;
 			buildPhases = (
 				009A201D2A9CD0C20065C99A /* Sources */,
 				009A201E2A9CD0C20065C99A /* Frameworks */,
@@ -116,9 +116,9 @@
 			);
 			dependencies = (
 			);
-			name = CD3;
+			name = "Core Data Note";
 			productName = CD3;
-			productReference = 009A20212A9CD0C20065C99A /* CD3.app */;
+			productReference = 009A20212A9CD0C20065C99A /* Core Data Note.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -129,14 +129,14 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					009A20202A9CD0C20065C99A = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 009A201C2A9CD0C20065C99A /* Build configuration list for PBXProject "CD3" */;
+			buildConfigurationList = 009A201C2A9CD0C20065C99A /* Build configuration list for PBXProject "Core Data Note" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,7 +149,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				009A20202A9CD0C20065C99A /* CD3 */,
+				009A20202A9CD0C20065C99A /* Core Data Note */,
 			);
 		};
 /* End PBXProject section */
@@ -202,6 +202,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -234,6 +235,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -262,6 +264,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -294,6 +297,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -319,14 +323,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7CQ436Z988;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = S4A283Y4R2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CD3/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Core Data Test";
+				INFOPLIST_KEY_CFBundleDisplayName = "Core Data Note";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,6 +344,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -350,14 +358,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7CQ436Z988;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = S4A283Y4R2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CD3/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Core Data Test";
+				INFOPLIST_KEY_CFBundleDisplayName = "Core Data Note";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -368,6 +379,7 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -377,7 +389,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		009A201C2A9CD0C20065C99A /* Build configuration list for PBXProject "CD3" */ = {
+		009A201C2A9CD0C20065C99A /* Build configuration list for PBXProject "Core Data Note" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				009A20332A9CD0C40065C99A /* Debug */,
@@ -386,7 +398,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		009A20352A9CD0C40065C99A /* Build configuration list for PBXNativeTarget "CD3" */ = {
+		009A20352A9CD0C40065C99A /* Build configuration list for PBXNativeTarget "Core Data Note" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				009A20362A9CD0C40065C99A /* Debug */,

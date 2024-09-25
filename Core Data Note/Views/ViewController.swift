@@ -38,15 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     var showTagsButton: UIBarButtonItem!
     var dataSource: UITableViewDiffableDataSource<TableViewSection, NoteEntity>!
     var viewModel: ViewControllerViewModel!
-    
-//    func addSampleTag() {
-//        let tag = TagEntity(context: viewModel.manager.context)
-//        tag.name = "Sample tag 2"
-//        tag.notes = NSSet(array: viewModel.notes)
-//        viewModel.manager.context.insert(tag)
-//        viewModel.manager.save()
-//    }
-    
+        
     override func viewDidLoad() {
         viewModel = ViewControllerViewModel()
         title = "Core Data Notes"
@@ -58,9 +50,6 @@ class ViewController: UIViewController, UITableViewDelegate {
         addNewNoteButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewNote))
         navigationItem.rightBarButtonItem = addNewNoteButton
         navigationItem.leftBarButtonItem = showTagsButton
-        
-//        addSampleTag()
-        
         
         super.viewDidLoad()
     }
@@ -97,7 +86,6 @@ class ViewController: UIViewController, UITableViewDelegate {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.frame = view.bounds
         tableView.delegate = self
-//        tableView.allowsSelection = false
         view.addSubview(tableView)
     }
     
@@ -179,7 +167,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     func swipeToDelete(indexPath: IndexPath) -> UISwipeActionsConfiguration {
         
         
-        let conAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, esc in
+        let swipeToDeleteAction = UIContextualAction(style: .destructive, title: "Delete") { action, view, esc in
             
             guard let item = self.dataSource.itemIdentifier(for: indexPath) else {return}
             
@@ -187,7 +175,7 @@ class ViewController: UIViewController, UITableViewDelegate {
             self.deleteItemFromSnapshot(item: item)
             
         }
-        return UISwipeActionsConfiguration(actions: [conAction])
+        return UISwipeActionsConfiguration(actions: [swipeToDeleteAction])
     }
     
 

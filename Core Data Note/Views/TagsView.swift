@@ -15,47 +15,41 @@ struct TagsView: View {
     
     var body: some View {
         
-        
-        
-        VStack{
+        VStack {
             Button {
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack{
+                    Text("Tags")
+                        .font(.title)
                     Spacer()
                     Image(systemName: "xmark.circle")
                         .font(.headline)
                 }
                 .padding(.all)
-                
-                
-                
-                
             }
-            
             
             List {
                 ForEach(viewModel.allAvailableTagsInDatabase) { tag in
-                    VStack(alignment: .leading) {
+                    HStack {
                         Text(tag.name ?? "no text")
-                        Text("Notes associated: \(String(tag.notes!.count))")
-                        Text("Identifier: "+String(tag.id.hashValue))
-                            .font(Font.footnote)
-                            .foregroundColor(Color.gray)
+                            .font(.headline)
+                        Spacer()
+                        Text("\(String(tag.notes!.count))")
+                            .font(.headline)
                     }
-                    
-                    
                 }.onDelete { indexSet in
                     let index = indexSet.first!
                     let tagToDelete = viewModel.allAvailableTagsInDatabase[index]
                     viewModel.deleteTag(tag: tagToDelete)
                 }
             }.listStyle(.inset)
-            
+                .overlay {
+                    if viewModel.allAvailableTagsInDatabase.isEmpty {
+                        ContentUnavailableView("No tags registered", systemImage: "tag.slash")
+                    }
+                }
         }
-        
-        
-        
     }
 }
 

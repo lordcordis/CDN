@@ -49,7 +49,7 @@ class ViewControllerViewModel {
             switch tagsArray.count {
             case 1:
                 guard let textForTag = tagsArray.first?.name else {return "Error"}
-                return "Tag: \(textForTag)"
+                return "\(textForTag)"
             default:
                 
                 for tag in tagsArray {
@@ -57,7 +57,7 @@ class ViewControllerViewModel {
                     tagsStringsArray.append(name) }
                 
                 let output = tagsStringsArray.joined(separator: ", ")
-                return "Tags: \(output)"
+                return "\(output)"
                 
                 
                 
